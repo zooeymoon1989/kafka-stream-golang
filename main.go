@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"github.com/google/uuid"
 	"github.com/segmentio/kafka-go"
 	"kafka-stream-golang/config"
 	"kafka-stream-golang/models"
@@ -19,14 +20,22 @@ func main() {
 
 	msg := models.Order{
 		Item:        "foo",
-		Quantity:    1,
-		DeliverType: "biking",
+		Quantity:    32,
+		DeliverType: "motobike",
 	}
 
 	msgByte, _ := json.Marshal(msg)
-
 	_, err = conn.WriteMessages(
-		kafka.Message{Value: msgByte},
+		kafka.Message{
+			Headers: []kafka.Header{
+				{
+					Key:   "__TypeId__",
+					Value: []byte("site.liwenqiang.mykafka.services.models.Order"),
+				},
+			},
+			Key:   []byte(uuid.New().String()),
+			Value: msgByte,
+		},
 	)
 
 	if err != nil {
