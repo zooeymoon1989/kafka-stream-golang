@@ -27,12 +27,6 @@ func main() {
 	msgByte, _ := json.Marshal(msg)
 	_, err = conn.WriteMessages(
 		kafka.Message{
-			Headers: []kafka.Header{
-				{
-					Key:   "__TypeId__",
-					Value: []byte("site.liwenqiang.mykafka.services.models.Order"),
-				},
-			},
 			Key:   []byte(uuid.New().String()),
 			Value: msgByte,
 		},
