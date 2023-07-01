@@ -18,10 +18,12 @@ func main() {
 	}
 	conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
 
-	msg := models.Order{
-		Item:        "foo",
-		Quantity:    32,
-		DeliverType: "motobike",
+	msg := models.Tweets{
+		Id:        2,
+		CreatedAt: 1688240130,
+		Lang:      "en",
+		Retweet:   false,
+		Text:      "hello world",
 	}
 
 	msgByte, _ := json.Marshal(msg)

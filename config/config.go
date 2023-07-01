@@ -1,7 +1,7 @@
 package config
 
 var (
-	Topic     = "my-test"
+	Topic     = "tweets"
 	Partition = 0
 	Server    = "localhost:19092"
 )
